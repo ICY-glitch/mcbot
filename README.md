@@ -3,3 +3,4 @@ Bárki használhatja letöltheti.
 Ez a kód magában nem működik tehát kérlek nézz bele és konfigold mielőtt kommentelsz.
 Köszi.
 Használd egészséggel
+FONTOS: CSAK CRACKELT VERZIÓN MŰKÖDIK!!!
