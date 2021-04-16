@@ -1,0 +1,137 @@
+
+
+
+
+
+
+
+//(host:ip cím) (port szerver portja pl 12555)
+
+
+
+
+
+
+
+
+ //bot neve
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //kihez mennyen a bot (bot neve, neved)
+ 
+ //ha nem találja a játékost = undefined ??
+ 
+ 
+ 
+ //kit kezdjen el ölni
+ // ha nem talál = látlak
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //kommand hogy hova menjen
+ 
+ 
+ 
+ // ha sikeres keresés = indul a pozicíóra
+ 
+ 
+ // kit kövessen syntax: kövess (neved)
+ 
+ 
+ 
+ //sikeres az akció a bot elindul
+ 
+ //ne kövesd a (player neve) ??
+ 
+ 
+ //sikeres akció bot nem követi az embert
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //kövessen (name)
+ 
+ 
+ 
+ //akció sikeres bot el kedzi követni az embert
+ 
+ //nekövesse (name)
+ 
+ 
+ //akció sikeres az embert nem követi a bot
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //elindul megölni az embert
+ 
+ //lehívja a kit tagot
+ // elindul támadni a (player name)
+ 
+ 
+ 
+ 
+ 
+ //bot logolja a porblémákat kick,error ami nem probléma spawn
+ 
+ 
+ 
+ 
+ 
+ //registráció
+ //registráció
+ //registráció
