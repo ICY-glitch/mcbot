@@ -1,0 +1,143 @@
+const mineflayer = require('mineflayer')
+const {Vec3} = require("vec3");
+const { pathfinder, Movements, goals } = require('mineflayer-pathfinder')
+const { movements } = require('mineflayer-pathfinder')
+const pvp = require('mineflayer-pvp').plugin
+
+if (process.argv.length < 3 || process.argv.length > 5) {
+    console.log('Usage : node multiple.js <host> <port>')
+    process.exit(1)
+}
+
+let i = 0
+function next () {
+    if (i < 1) {
+        i++
+        setTimeout(() => {
+            createBot(`TesztBot${i}`)
+
+            next()
+        }, 100)
+    }
+}
+next()
+
+var mint = {}
+
+
+
+
+function gotoPlayer(bot,name) {
+    const mcData = require('minecraft-data')(bot.version)
+    if (typeof mint[name] == "undefined") {
+        mint[name] = 0
+    }
+    const target = bot.players[name]?.entity
+    if (!target && mint[name] < 1) {
+        bot.chat("Nem látlak "+name+"!")
+        mint[name] = 10
+        return
+    } else {
+        if (mint[name] > 0) {
+            mint[name] = mint[name]-1
+            return
+        }
+    }
+    const { x: playerX, y: playerY, z: playerZ } = target.position
+
+    bot.pathfinder.setMovements(new Movements(bot, mcData))
+
+    bot.pathfinder.setGoal(new goals.GoalNear(playerX, playerY, playerZ,2))
+
+}
+
+
+
+tuc = {}
+
+function createBot (name) {
+    let bot = mineflayer.createBot({
+        host: process.argv[2],
+        port: parseInt(process.argv[3]),
+        username: name+"asd",
+        version: "1.16.4"
+    })
+    bot.loadPlugin(pathfinder)
+    bot.loadPlugin(pvp)
+    bot.on('messagestr', (a,username, message) => {
+        console.log("msg: "+message)
+    })
+    bot.on('chat', (username, message) => {
+        console.log(username)
+        if (username === "[Tag] "+bot.username) return
+
+
+        const args = message.slice("bot ").trim().split(' ');
+        const command = args.shift().toLowerCase();
+        console.log(command)
+        console.log(args)
+        if(command == "menj") {
+            const mcData = require('minecraft-data')(bot.version)
+            bot.pathfinder.setMovements(new Movements(bot, mcData))
+            bot.pathfinder.setGoal(new goals.GoalBlock (Number(args[0]),Number(args[1]),Number(args[2])))
+            bot.chat("Oké, odamegyek!")
+        }
+
+        if(command == "kövess") {
+            let raname = username.split("[Tag] ")
+
+            tuc[username] = setInterval(gotoPlayer,500, bot, raname[1])
+            bot.chat("Oké, követlek!")
+        }
+        if(command == "nekövess") {
+            try {
+                clearInterval (tuc[username])
+                bot.chat("Oké, nem követlek!")
+            } catch(e) {
+                bot.chat("Hiba: "+e)
+            }
+
+
+        }
+
+        if(command == "kövesd") {
+            let raname = username.split("[Tag] ")
+
+            tuc[username] = setInterval(gotoPlayer,500, bot, args[0])
+            bot.chat("Oké, követem!")
+        }
+        if(command == "nekövesd") {
+            try {
+                clearInterval (tuc[args[0]])
+                bot.chat("Oké, nem követem!")
+            } catch(e) {
+                bot.chat("Hiba: "+e)
+            }
+
+
+        }
+
+        if(command == "kill") {
+            const target = bot.players[args[0]]?.entity
+            bot.chat("/kit tag")
+            bot.pvp.attack(target)
+
+        }
+
+    })
+
+// Log errors and kick reasons:
+    bot.on('kicked', console.log)
+    bot.on('error', console.log)
+    bot.on("spawn",function(asdasd) {
+        console.log("spawnoltam! dat: "+asdasd
+        )
+        bot.chat("/register botvokaaaaa botvokaaaaa")
+        bot.chat("/login botvokaaaaa")
+        bot.chat("Bot vagyok! Test!")
+    })
+
+
+
+
+} 
